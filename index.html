@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborative Filtering Movie Recommender</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Collaborative Filtering Movie Recommender</h1>
+        <p>Pick a user and get two Top-5 lists built from rating patterns of 943 MovieLens users: one from users with similar taste (User-Based CF), one from movies rated like the ones this user rated (Item-Based CF).</p>
+
+        <div class="controls">
+            <select id="user-select" aria-label="User">
+                <option value="" disabled selected>Select a user</option>
+            </select>
+            <button id="recommend-btn" onclick="getRecommendations()">Get Recommendations</button>
+        </div>
+
+        <div id="result-box">
+            <div class="result-column">
+                <h2>User-Based CF</h2>
+                <p class="column-note">Score = predicted rating (1&ndash;5) from the 20 most similar users</p>
+                <div id="user-based-result"><p>Please wait, loading data...</p></div>
+            </div>
+            <div class="result-column">
+                <h2>Item-Based CF</h2>
+                <p class="column-note">Score = similarity to the movies this user rated, weighted by their ratings (0&ndash;1)</p>
+                <div id="item-based-result"><p>Please wait, loading data...</p></div>
+            </div>
+        </div>
+
+        <section class="predict">
+            <h2>Predict one rating</h2>
+            <p>Uses the user selected above.</p>
+            <div class="controls predict-controls">
+                <select id="movie-select" aria-label="Movie">
+                    <option value="" disabled selected>Select a movie</option>
+                </select>
+                <button id="predict-btn" onclick="getPrediction()">Predict Rating</button>
+            </div>
+            <div id="prediction-result"></div>
+        </section>
+
+        <footer>
+            Missing values: similarity uses co-rated movies only, weighted by how many movies two users (or two movies) share.
+            Data: MovieLens 100K.
+        </footer>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
